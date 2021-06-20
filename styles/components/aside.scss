@@ -1,0 +1,27 @@
+@import "../variables.scss";
+
+.aside {
+  width: 20vw;
+  height: 100vh;
+  background-color: rgb(42, 42, 71);
+  position: absolute;
+  .btn {
+    width: 100%;
+    color: white;
+    display: flex;
+    align-items: center;
+    padding: 20px 0px;
+    &:hover {
+      background-color: rgb(51, 103, 108);
+    }
+    & p {
+      padding: 0 0 0 10%;
+    }
+  }
+  .specialButtonDiv {
+    padding: 10%;
+  }
+  .specialButton {
+    @include myButton(rgb(36, 226, 154), rgb(42, 42, 71));
+  }
+}

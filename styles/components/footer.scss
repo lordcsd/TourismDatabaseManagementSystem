@@ -1,0 +1,17 @@
+@import "../variables.scss";
+
+.footer {
+  width: 100%;
+  background-color: rgb(30, 30, 30);
+  position: absolute;
+  bottom: 0;
+  padding:2rem;
+  color:white;
+  p{
+      color:rgb(184, 184, 184)
+  };
+  b{
+      padding:0 5px 0 0;
+      color:white
+  }
+}
