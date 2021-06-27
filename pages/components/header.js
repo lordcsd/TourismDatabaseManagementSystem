@@ -14,6 +14,7 @@ export default function Header({ styles }) {
           <button className={styles.myButton}>Sign-Up</button>
         </div>
       </header>
+      <div style={{height:'3px',width:'100%',backgroundColor:'rgb(42, 42, 71)'}}></div>
       <div className={styles.headerUnder}>
           <p className={styles.pageTitle}>Page Title</p>
         <div className={styles.iconsHolder}>

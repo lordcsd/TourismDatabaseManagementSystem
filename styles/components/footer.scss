@@ -2,16 +2,23 @@
 
 .footer {
   width: 100%;
-  background-color: rgb(30, 30, 30);
+  background-color: rgb(42, 42, 71);
   position: absolute;
-  bottom: 0;
-  padding:2rem;
-  color:white;
-  p{
-      color:rgb(184, 184, 184)
-  };
-  b{
-      padding:0 5px 0 0;
-      color:white
+  padding: 2rem;
+  color: white;
+  div{
+    display: flex;
+    align-items: center;
+    padding:10px 0 0 0
+  }
+  p {
+    color: rgb(184, 184, 184);
+  }
+  a{
+    padding:0 10px
+  }
+  b {
+    padding: 0 5px 0 0;
+    color: white;
   }
 }

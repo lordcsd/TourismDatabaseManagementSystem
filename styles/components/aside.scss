@@ -22,6 +22,9 @@
     padding: 10%;
   }
   .specialButton {
-    @include myButton(rgb(36, 226, 154), rgb(42, 42, 71));
+    @include myButtonOutline(rgb(36, 226, 154), white);
+    &:hover {
+      cursor: pointer;
+    }
   }
 }
