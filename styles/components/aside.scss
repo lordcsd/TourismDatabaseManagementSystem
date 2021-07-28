@@ -1,28 +1,38 @@
 @import "../variables.scss";
 
+@mixin btn($background){
+  width: 100%;
+  color: white;
+  display: flex;
+  align-items: center;
+  padding: 20px 0px;
+  background-color: $background ;
+    &:hover{cursor: pointer;
+  }
+  & p {
+    padding: 0 0 0 10%;
+  }
+}
+
 .aside {
   width: 20vw;
   height: 100vh;
-  background-color: rgb(42, 42, 71);
-  position: absolute;
-  .btn {
-    width: 100%;
-    color: white;
-    display: flex;
-    align-items: center;
-    padding: 20px 0px;
-    &:hover {
-      background-color: rgb(51, 103, 108);
-    }
-    & p {
-      padding: 0 0 0 10%;
-    }
+  background-color: $primary;
+  position:fixed;
+
+  .btn{
+    @include btn(rgba(51, 103, 108,0))
   }
+
+  .btnSelected{
+    @include btn(rgb(51, 103, 108))
+  }
+
   .specialButtonDiv {
     padding: 10%;
   }
   .specialButton {
-    @include myButtonOutline(rgb(36, 226, 154), white);
+    @include myButtonOutline($secondary, white);
     &:hover {
       cursor: pointer;
     }

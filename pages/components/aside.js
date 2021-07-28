@@ -1,19 +1,10 @@
-export default function Aside({styles}) {
-  let methodArray = [
-    {
-      text: "Show",
-    },
-    {
-      text: "Show",
-    },
-    {
-      text: "Show",
-    },
-  ];
-
-  let EachButton = ({ text, method }) => {
+export default function Aside({ styles, methodArray }) {
+  let EachButton = ({ text, method, selected }) => {
     return (
-      <div className={styles.btn}>
+      <div
+        className={selected ? styles.btnSelected : styles.btn}
+        onClick={() => method()}
+      >
         <p>{text}</p>
       </div>
     );
@@ -21,12 +12,19 @@ export default function Aside({styles}) {
 
   return (
     <aside className={styles.aside}>
-      {methodArray.map((each) => {
-        return <EachButton text={each.text} />;
+      <div style={{ height: "9rem" }}></div>
+      {methodArray.map((each, index) => {
+        return (
+          <EachButton
+            key={index}
+            method={() => {
+              each.method(index);
+            }}
+            text={each.text}
+            selected={index == each.whichComponent ? 1 : 0}
+          />
+        );
       })}
-      <div className={styles.specialButtonDiv}>
-        <button className={styles.specialButton}> Something</button>
-      </div>
     </aside>
   );
 }

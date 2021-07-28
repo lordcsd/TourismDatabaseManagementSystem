@@ -1,13 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import styles from "../styles/Home.module.scss";
 import VpnKeyIcon from "@material-ui/icons/VpnKey";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import Link from "next/link";
-import Image from "next/image";
 
 import Footer from "./components/footer";
-import { style } from "@material-ui/system";
+import axios from "axios";
+let baseUrl = "http://localhost:3001";
 
 let DetailCard = ({ imageUrl, desc, title }) => (
   <div className={styles.detailCard}>
@@ -20,7 +20,7 @@ let DetailCard = ({ imageUrl, desc, title }) => (
 );
 
 export default function HomePage() {
-  let [numberOfSites,setNumberOfSites] = useState(0)
+  let [numberOfSites, setNumberOfSites] = useState(0);
   let cardDetails = [
     {
       imageUrl: "/homepageImages/greenland.jpg",
@@ -48,44 +48,63 @@ export default function HomePage() {
       desc: `Get the opportunity to spend quality and worth-while time with loved ones!`,
     },
   ];
+
+  useEffect(() => {
+    axios
+      .get(baseUrl + "/tickets")
+      .then((res) => {
+        setNumberOfSites(res.data.count)
+      })
+      .catch((err) => console.log(err));
+  }, []);
   return (
-      <div className={styles.homeRoot}>
-        <header className={styles.homeHeader}>
-          <div className={styles.homeLogoDiv}>
-            <h1 style={{ display: "flex" }}>
-              Cyber<p>DB</p>
-            </h1>
-            <div>
-              <div className={styles.iconDiv}>
-                <Link href="login">
-                  <VpnKeyIcon  />
-                </Link>
-                <AccountCircleIcon/>
-              </div>
+    <div className={styles.homeRoot}>
+      <header className={styles.homeHeader}>
+        <div className={styles.homeLogoDiv}>
+          <h1 style={{ display: "flex" }}>
+            TourCyber<p>DB</p>
+          </h1>
+          <div>
+            <div className={styles.iconDiv}>
+              <Link href="login">
+                <VpnKeyIcon />
+              </Link>
+              <AccountCircleIcon />
             </div>
           </div>
-        </header>
-        <div className={styles.underHeader}>
-          <p>We have {numberOfSites} available locations</p>
         </div>
-        <main>
-          <div
-            style={{
-              display: "flex",
-              flexWrap: "wrap",
-              justifyContent: "space-around",
-            }}
-          >
-            {cardDetails.map((each, index) => (
-              <DetailCard
-                imageUrl={each.imageUrl}
-                desc={each.desc}
-                title={each.title}
-              />
-            ))}
-          </div>
-        </main>
-        <Footer styles={styles} />
+      </header>
+      <div className={styles.underHeader}>
+        <p>We have {numberOfSites} available locations</p>
       </div>
+      <main>
+        <div
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            justifyContent: "space-around",
+          }}
+        >
+          {cardDetails.map((each, index) => (
+            <DetailCard
+              imageUrl={each.imageUrl}
+              desc={each.desc}
+              title={each.title}
+            />
+          ))}
+        </div>
+        <div style={{ padding: "0 0 40px 0", display: "block" }}>
+          <h4>About Us</h4>
+          <div>
+            CyberDB allows you experience realtime database management system
+            for the tourism industry, allowing you manage events, tickets, event
+            availabity, keep track of the entire tourism process, allowing you
+            to access available tickets you to buy tickets and follow your trips
+            from start to finish!
+          </div>
+        </div>
+      </main>
+      <Footer styles={styles} />
+    </div>
   );
 }

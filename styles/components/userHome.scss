@@ -1,0 +1,169 @@
+@import "../variables.scss";
+
+.background {
+  background-color: $lightBackground;
+  height: 100vh;
+}
+
+.overview {
+  background-color: $lightBackground;
+  .cardContainer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: space-around;
+  }
+  .overviewCard {
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 20px 20px;
+    border-radius: 5px;
+    margin: 1rem;
+    height: 200px;
+    width: 44%;
+    color: $primary;
+    background-color: white;
+    @include shadow();
+    h1 {
+      font-size: 80px;
+    }
+    p {
+      font-size: 20px;
+    }
+  }
+}
+
+.manageTicketsContainer {
+  background-color: $lightBackground;
+  padding: 1rem 0 0 0;
+  @include searchBar();
+
+  .manageTickets {
+    .noTour {
+      color: $primary;
+      text-align: center;
+      width: 100%;
+    }
+    .ticketCard {
+      display: flex;
+      align-items: flex-start;
+      flex-direction: column;
+      justify-content: space-between;
+      background-color: white;
+      padding: 10px;
+      margin: 20px 1rem;
+      @include shadow();
+      border-radius: 5px;
+
+      .cardIconsRow {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        align-items: center;
+        div {
+          width: 75px;
+          display: flex;
+          justify-content: space-between;
+        }
+      }
+      .textSide {
+        padding: 0 0 10px 0;
+      }
+      .cardTitle {
+        font-size: 20px;
+        font-weight: bold;
+        padding: 10px 0;
+      }
+      .cardIcons {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        height: 100%;
+      }
+    }
+  }
+  .addButtonContainer {
+    display: flex;
+    justify-content: flex-end;
+    margin: 2rem;
+    .addButton {
+      @include myButton($primary, white);
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.accountSettingContainer {
+  display: flex;
+  flex-direction: column;
+  .accountSetting {
+    margin: 2rem;
+    background-color: rgb(255, 255, 255);
+    padding: 20px;
+    border-radius: 10px;
+    @include shadow();
+    display: flex;
+    flex-direction: column;
+    .settingInput {
+      margin: 5px 0;
+    }
+  }
+  .submitButton {
+    @include myButton($primary, white);
+  }
+  .submitButtonContainer {
+    display: flex;
+    justify-content: flex-end;
+    padding: 0 2rem;
+  }
+}
+
+.manageCart {
+  @mixin cartCard {
+    @include shadow();
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 1rem;
+    padding: 10px;
+    border-radius: 5px;
+  }
+
+  .cartCard {
+    @include cartCard();
+    background-color: white;
+    .title {
+      font-weight: bold;
+    }
+    .priceAndIcon {
+      width: 100px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .price {
+      color: rgb(0, 102, 72);
+    }
+  }
+  .headerCard {
+    @include cartCard();
+    background-color: $primary;
+    color: white;
+  }
+  .bottomCard {
+    @include cartCard();
+    background-color: $primary;
+    color: white;
+  }
+  .payRow {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 1rem;
+    border-radius: 5px;
+    button {
+      @include myButton($orange, $primary);
+    }
+  }
+}

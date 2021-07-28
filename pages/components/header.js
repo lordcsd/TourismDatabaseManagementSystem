@@ -1,25 +1,36 @@
 import NotificationsNoneIcon from "@material-ui/icons/NotificationsNone";
-import ChatBubbleOutlineIcon from "@material-ui/icons/ChatBubbleOutline";
+import Power from "@material-ui/icons/SettingsPowerRounded";
+import { useRouter } from "next/router";
 
-import { Button, Typography } from "@material-ui/core";
-
-export default function Header({ styles }) {
+export default function Header({ styles, title }) {
+  let router = useRouter();
   return (
     <div>
       <header className={styles.header}>
         <h1>CyberTourDB</h1>
-
-        <div>
-          <button className={styles.myButtonOutlined}>Sign-In</button>
-          <button className={styles.myButton}>Sign-Up</button>
-        </div>
       </header>
-      <div style={{height:'3px',width:'100%',backgroundColor:'rgb(42, 42, 71)'}}></div>
+      <div
+        style={{
+          height: "3px",
+          width: "100%",
+          backgroundColor: "rgb(42, 42, 71)",
+        }}
+      ></div>
       <div className={styles.headerUnder}>
-          <p className={styles.pageTitle}>Page Title</p>
+        <p className={styles.pageTitle}>{title}</p>
         <div className={styles.iconsHolder}>
-            <NotificationsNoneIcon color="primary" />
-            <ChatBubbleOutlineIcon color="primary" />
+          <NotificationsNoneIcon />
+          <Power
+            onClick={() => {
+              let confirmed = window.confirm(
+                "Are you sure you want to log-out?"
+              );
+              if (confirmed) {
+                window.localStorage.removeItem("cyberTourUser")
+                router.push("/login");
+              }
+            }}
+          />
         </div>
       </div>
     </div>
