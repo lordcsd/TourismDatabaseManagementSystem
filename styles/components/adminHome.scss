@@ -12,26 +12,6 @@
     flex-wrap: wrap;
     align-items: space-around;
   }
-  .overviewCard {
-    color: white;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    padding: 20px 20px;
-    border-radius: 5px;
-    margin: 1rem;
-    height: 200px;
-    width: 44%;
-    color: $primary;
-    background-color: white;
-    @include shadow();
-    h1 {
-      font-size: 80px;
-    }
-    p {
-      font-size: 30px;
-    }
-  }
 }
 
 .manageTicketsContainer {
@@ -60,11 +40,12 @@
       align-items: center;
       .textSide {
         padding: 0 0 10px 10px;
+        font-size: 1rem;
       }
       .cardTitle {
-        font-size: 20px;
+        font-size: 1rem;
         font-weight: bold;
-        padding: 10px 0;
+        padding: 10px 10px 0 0;
       }
       .cardIcons {
         height: 100%;
@@ -82,7 +63,6 @@
   padding: 10px;
   margin: 1rem;
   position: absolute;
-  height: 100vh;
   width: 75%;
   @include shadow();
   .closeContain {
@@ -163,7 +143,7 @@
     display: flex;
     justify-content: space-between;
     margin: 0 1rem;
-    padding:3px;
+    padding: 3px;
     border-radius: 3px;
     p {
       width: 20%;
@@ -172,6 +152,92 @@
       background-color: rgb(181, 181, 181);
     }
   }
-  .userCards {
+}
+
+.adminNotificationsRoot {
+  padding: 1rem;
+  .enterUserId {
+    background-color: $lightBackground;
+    div {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 20px;
+      label {
+        background-color: $primary;
+        color: white;
+        padding: 0 10px;
+        border-radius: 5px 5px 0 0;
+      }
+    }
+  }
+  textarea {
+    padding: 5px;
+  }
+  .shareDiv {
+    display: flex;
+    justify-content: flex-end;
+    button {
+      @include myButton($secondary, $primary);
+    }
+  }
+}
+
+.recordsRoot {
+  padding: 1rem;
+  background: $lightBackground;
+  .tableSelect {
+    display: flex;
+    justify-content: space-around;
+    border-radius: 5px;
+    text-align: center;
+    .buttonSelected {
+      background: $secondary;
+      color: $primary;
+      height: 100%;
+      width: 25%;
+      padding: 5px 0;
+    }
+    .buttonUnSelected {
+      background: $primary;
+      color: white;
+      height: 100%;
+      width: 25%;
+      padding: 5px 0;
+    }
+  }
+  .keyHeader {
+    display: flex;
+    justify-content: space-between;
+    color: white;
+    background: $primary;
+    margin: 10px 0;
+    padding: 5px;
+    p {
+      width: 20%;
+    }
+  }
+  .eachDateTotal {
+    display: flex;
+    background: $primary;
+    color: white;
+    justify-content: flex-end;
+    padding: 10px 3px;
+    margin: 0 0 20px 0;
+    p {
+      width: 20%;
+    }
+  }
+  .eachSale {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 10px 3px;
+    background: white;
+    border-bottom: 1px solid $primary;
+    color: rgba(0, 0, 0, 0.611);
+    p {
+      width: 20%;
+    }
   }
 }

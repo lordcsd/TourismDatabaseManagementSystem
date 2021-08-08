@@ -16,7 +16,7 @@
     border-radius: 5px;
     h1 {
       color: rgb(40, 40, 40);
-      padding: 0 0 15px 0;
+      padding: 0 0 10px 0;
     }
     &:hover {
       transition: 1s;
@@ -34,14 +34,11 @@
     margin: 5px;
   }
   .submitButton {
-    margin: 16px;
     background-color: $secondary;
     border: none;
-    padding: 16px;
-    border-radius: 5px;
-    font-size: 1.5rem;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-    color: $primary;
+    padding: 10px;
+    border-radius: 3px;
+    color: white;
     &:hover {
       transition: 1s;
       box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
@@ -51,7 +48,7 @@
 }
 
 .backDiv {
-  padding: 2rem;
+  padding: 2rem 2rem 0 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;

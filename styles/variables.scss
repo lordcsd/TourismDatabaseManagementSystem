@@ -1,6 +1,7 @@
 $primary: rgb(33, 33, 51);
-$secondary: rgb(36, 226, 154);
-$orange: rgb(255, 166, 50);
+$secondary: rgb(36, 226, 169);
+
+$orange: rgb(235, 42, 42);
 $lightBackground: rgb(237, 237, 237);
 
 @mixin elevation() {
@@ -33,6 +34,7 @@ $lightBackground: rgb(237, 237, 237);
   .searchContain {
     display: flex;
     justify-content: space-between;
+    align-items: flex-end;
     margin: 0 1rem 2rem 1rem;
     .search {
       display: flex;
@@ -62,3 +64,20 @@ $lightBackground: rgb(237, 237, 237);
     }
   }
 }
+
+@mixin btn($background) {
+  width: 100%;
+  color: white;
+  display: flex;
+  align-items: center;
+  padding: 20px 0px;
+  background-color: $background;
+  &:hover {
+    cursor: pointer;
+  }
+  & p {
+    width: 100%;
+    text-align: center;
+  }
+}
+

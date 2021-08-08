@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button, Switch, TextField } from "@material-ui/core";
+import { Button, Switch, TextField, Select, Option } from "@material-ui/core";
 import { useRouter } from "next/router";
 import Link from "next/link";
 
@@ -13,6 +13,7 @@ export default function Login() {
   let [state, setState] = useState({
     admin: false,
     submitAction: false,
+    showPassword: false,
     name: "",
     email: "",
     password: "",
@@ -157,10 +158,7 @@ export default function Login() {
                 JSON.stringify(res.data)
               );
               if (window.localStorage.getItem("cyberTourUser")) {
-                router.push({
-                  pathname: "/userHome",
-                  query: { email: res.data.email },
-                });
+                router.push("/userHome");
               }
             })
             .catch((err) => {
@@ -176,6 +174,9 @@ export default function Login() {
     }
   };
 
+  let loginDetails = ["email", "password"];
+  let signupDetails = ["confirmPassword", "name", "phone", "age"];
+
   return (
     <div style={{ backgroundColor: "rgba(0,0,0,0.05)" }}>
       <div className={styles.backDiv}>
@@ -188,107 +189,129 @@ export default function Login() {
       </div>
       <div className={styles.root}>
         <div className={styles.form}>
-          <div className={styles.input}>
-            <h1>{state.submitAction ? "Login" : "SignUp"}</h1>
-            <label>Are you an admin?</label>
-            <Switch
-              color="primary"
-              checked={state.admin}
-              onChange={async function () {
-                await setState({
-                  ...state,
-                  admin: !state.admin,
-                  loginErrors: [],
-                });
-                console.log(state.gender);
-              }}
-            />
-          </div>
-
-          <TextField
-            className={styles.input}
-            onChange={async (e) => await handleInput(e)}
-            placeholder="Enter Email"
-            variant="outlined"
-            label="Email"
-            name="email"
-          />
-          <TextField
-            className={styles.input}
-            onChange={async (e) => await handleInput(e)}
-            placeholder="Enter Password"
-            variant="outlined"
-            label="Password"
-            name="password"
-            type="password"
-          />
-
-          {!state.submitAction ? (
-            <>
-              <TextField
-                className={styles.input}
-                onChange={async (e) => await handleInput(e)}
-                placeholder="Confirm Password"
-                variant="outlined"
-                label="Confirm Password"
-                name="confirmPassword"
-                type="password"
-              />
-              <TextField
-                className={styles.input}
-                onChange={async (e) => await handleInput(e)}
-                placeholder="Enter Name"
-                variant="outlined"
-                label="name"
-                name="name"
-              />
-              <TextField
-                className={styles.input}
-                onChange={async (e) => await handleInput(e)}
-                placeholder="Phone Number"
-                variant="outlined"
-                label="Phone"
-                name="phone"
-              />
-              <TextField
-                className={styles.input}
-                onChange={async (e) => await handleInput(e)}
-                placeholder="Age"
-                variant="outlined"
-                label="Age"
-                name="Age"
-                type="number"
-              />
-              <div style={{ padding: "10px", margin: "5px" }}>
-                <label>Select Gender</label>
-                <select
-                  onChange={async (e) => {
-                    await setState({
-                      ...state,
-                      gender: Boolean(Number(e.target.value))
-                        ? "Male"
-                        : "Female",
-                    });
-                  }}
-                >
-                  <option value="1">Male</option>
-                  <option value="0">Female</option>
-                </select>
-              </div>
-            </>
-          ) : (
-            <div></div>
-          )}
-
-          {state.loginErrors.map((each, index) => (
-            <p style={{ color: "rgb(255,50,50)" }}>{each}</p>
-          ))}
-          <button
-            className={styles.submitButton}
-            onClick={() => loginOrSignUp()}
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "flex-end",
+            }}
           >
-            {state.submitAction ? "Login" : "SignUp"}
-          </button>
+            <div className={styles.input}>
+              <h1>{state.submitAction ? "Login" : "SignUp"}</h1>
+              <label>Are you an admin?</label>
+              <Switch
+                color="primary"
+                checked={state.admin}
+                onChange={async function () {
+                  await setState({
+                    ...state,
+                    admin: !state.admin,
+                    loginErrors: [],
+                  });
+                }}
+              />
+            </div>
+
+            <div className={styles.input}>
+              <label>Show passwords?</label>
+              <Switch
+                checked={state.showPassword}
+                onChange={async function () {
+                  await setState({
+                    ...state,
+                    showPassword: !state.showPassword,
+                  });
+                }}
+              />
+            </div>
+          </div>
+          {loginDetails.map((each, index) => (
+            <TextField
+              className={styles.input}
+              onChange={async (e) => await handleInput(e)}
+              placeholder={`Enter ${each}`}
+              variant="outlined"
+              size="small"
+              label={each}
+              name={each}
+              key={index}
+              type={
+                each == "password"
+                  ? state.showPassword
+                    ? "text"
+                    : "password"
+                  : "text"
+              }
+            />
+          ))}
+          <>
+            {!state.submitAction ? (
+              signupDetails.map((each, index) => (
+                <TextField
+                  className={styles.input}
+                  onChange={async (e) => await handleInput(e)}
+                  placeholder={each}
+                  variant="outlined"
+                  size="small"
+                  label={each}
+                  name={each}
+                  key={index}
+                  type={
+                    each == "password" || each == "confirmPassword"
+                      ? state.showPassword
+                        ? "text"
+                        : "password"
+                      : "text"
+                  }
+                />
+              ))
+            ) : (
+              <div></div>
+            )}
+            <div
+              style={{
+                padding: "10px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+              }}
+            >
+              <div>
+                {!state.submitAction ? (
+                  <div>
+                    <label style={{ padding: "0 10px 0 0" }}>
+                      Select Gender
+                    </label>
+                    <select
+                      onChange={async (e) => {
+                        await setState({
+                          ...state,
+                          gender: Boolean(Number(e.target.value))
+                            ? "Male"
+                            : "Female",
+                        });
+                      }}
+                    >
+                      <option value="1">Male</option>
+                      <option value="0">Female</option>
+                    </select>{" "}
+                  </div>
+                ) : (
+                  <div></div>
+                )}
+              </div>
+              <p></p>
+              <button
+                className={styles.submitButton}
+                onClick={() => loginOrSignUp()}
+              >
+                {state.submitAction ? "Login" : "SignUp"}
+              </button>
+            </div>
+          </>
+          {state.loginErrors.map((each, index) => (
+            <p style={{ color: "rgb(255,50,50)" }} key={index}>{each}</p>
+          ))}{" "}
           <p
             onClick={async () =>
               await setState({

@@ -4,14 +4,15 @@ import styles from "../styles/Home.module.scss";
 import VpnKeyIcon from "@material-ui/icons/VpnKey";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import Link from "next/link";
+import Image from "next/image";
 
-import Footer from "./components/footer";
+import Footer from "../components/footer";
 import axios from "axios";
 let baseUrl = "http://localhost:3001";
 
 let DetailCard = ({ imageUrl, desc, title }) => (
   <div className={styles.detailCard}>
-    <img height={160} width={200} src={imageUrl} />
+    <Image alt="cardImage" height={160*2} width={200*2} src={imageUrl} />
     <div className={styles.texts}>
       <h2>{title}</h2>
       <p>{desc}</p>
@@ -53,16 +54,18 @@ export default function HomePage() {
     axios
       .get(baseUrl + "/tickets")
       .then((res) => {
-        setNumberOfSites(res.data.count)
+        setNumberOfSites(res.data.count);
       })
       .catch((err) => console.log(err));
-  }, []);
+    }, []);
+    // eslint-disable-line react-hooks/exhaustive-deps
+    
   return (
     <div className={styles.homeRoot}>
       <header className={styles.homeHeader}>
         <div className={styles.homeLogoDiv}>
           <h1 style={{ display: "flex" }}>
-            TourCyber<p>DB</p>
+            Tourism<p>DB</p>
           </h1>
           <div>
             <div className={styles.iconDiv}>
@@ -90,6 +93,7 @@ export default function HomePage() {
               imageUrl={each.imageUrl}
               desc={each.desc}
               title={each.title}
+              key={index}
             />
           ))}
         </div>

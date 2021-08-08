@@ -1,9 +1,100 @@
-@import './variables.scss';
+@import "./variables.scss";
 
-@import './components/aside.scss';
-@import './components/footer.scss';
-@import './components/header.scss';
-@import './components/login.scss';
-@import './components/homepage.scss';
-@import './components/adminHome.scss';
-@import './components/userHome.scss';
+@import "./components/footer.scss";
+@import "./components/header.scss";
+@import "./components/login.scss";
+@import "./components/homepage.scss";
+@import "./components/adminHome.scss";
+@import "./components/userHome.scss";
+@import "./components/sessionExpired.scss";
+
+.eachHome {
+  margin: 0 0 0 10rem;
+}
+
+.aside {
+  width: 10rem;
+  height: 100vh;
+  background-color: $primary;
+  position: fixed;
+  .img {
+    height: 7rem;
+    padding: 1rem 0;
+  }
+  .btn {
+    @include btn(rgba(51, 103, 108, 0));
+    p {
+      text-align: left;
+      padding: 0 20px;
+    }
+  }
+  .btnSelected {
+    @include btn(rgb(51, 103, 108));
+  }
+}
+
+.headerAndAside {
+  display: flex;
+}
+
+.overviewCard {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 20px 20px;
+  border-radius: 5px;
+  margin: 0.5rem;
+  width: 44%;
+  color: $primary;
+  background-color: white;
+  @include shadow();
+  h1 {
+    font-size: 80px;
+  }
+  p {
+    font-size: 20px;
+  }
+}
+
+@mixin headerFullWidth() {
+  width: 100vw;
+  margin-left: 0;
+}
+
+@media (max-width: 800px) {
+  .headerAndAside {
+    display: block;
+  }
+  .header {
+    @include headerFullWidth();
+  }
+  .headerUnder {
+    @include headerFullWidth();
+  }
+  .underHeaderLine {
+    @include headerFullWidth();
+  }
+  .eachHome {
+    margin: 0 0 0 0;
+  }
+  .aside {
+    height: auto;
+    position: unset;
+    width: auto;
+    display: flex;
+    .img {
+      display: none;
+    }
+    .btn {
+      padding: 10px 0;
+    }
+    .btnSelected {
+      padding: 10px 0;
+    }
+    p {
+      font-size: 0.7rem;
+      text-align: center;
+    }
+  }
+}
