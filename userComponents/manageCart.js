@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import { Delete, ShoppingCart } from "@material-ui/icons";
 import { yellow } from "@material-ui/core/colors";
-
-//import FlutterWave from "./flutterWave";
 import axios from "axios";
+//import PaystackHookExample from "./paystack";
 
 let baseURL = "http://localhost:3001";
 let api, store;
@@ -62,8 +61,8 @@ export default function ManageCart({
           router.push("/sessionExpired");
         }
       });
-    }, [state.tickets]);
-    // eslint-disable-line react-hooks/exhaustive-deps
+  }, [state.tickets]);
+  // eslint-disable-line react-hooks/exhaustive-deps
 
   let payforTickets = () => {
     if (state.tickets.length > 0) {
@@ -136,8 +135,8 @@ export default function ManageCart({
       </div>
       <div className={styles.payRow}>
         <p>{state.tickets.length < 1 ? "Cart is Empty" : ""}</p>
-        <button onClick={() => payforTickets()}>Pay</button>
-        {/* <FlutterWave amount={state.totalPrice} /> */}
+        <button onClick={payforTickets}>Pay</button>
+        {/* <PaystackHookExample amount={state.totalPrice} /> */}
       </div>
     </div>
   );

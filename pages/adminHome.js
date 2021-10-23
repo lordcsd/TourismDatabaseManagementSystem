@@ -18,7 +18,7 @@ let api, store;
 let baseUrl = "http://localhost:3001";
 
 function AdminHome() {
-  let [whichComponent, setWhichComponent] = useState(5);
+  let [whichComponent, setWhichComponent] = useState(1);
 
   let components = [
     <Overview styles={styles} key={0}/>,

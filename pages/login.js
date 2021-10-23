@@ -22,6 +22,7 @@ export default function Login() {
     age: 0,
     gender: "Male",
     loginErrors: [],
+    secretKey: "",
   });
 
   let router = useRouter();
@@ -74,17 +75,28 @@ export default function Login() {
             phone: state.phone,
             age: state.age,
             gender: state.gender,
+            secretKey: state.secretKey,
           };
+          console.log(data);
           axios
             .post(`${baseUrl}/admins/signup`, data)
-            .then((res) => console.log(res))
+            .then((res) => {
+              setState({ ...state, submitAction: true });
+            })
             .catch((err) => {
               if (err) {
-                console.log("error");
-              }
-              if (err.message.indexOf("409")) {
+                console.log(err);
+              } else if (err.message.includes("409")) {
                 let newError = state.loginErrors;
                 newError.push("Email is already registered");
+                setState({ ...state, loginErrors: newError });
+              } else if (err.message.includes("503")) {
+                let newError = state.loginErrors;
+                newError.push("SecretKey is already taken");
+                setState({ ...state, loginErrors: newError });
+              } else if (err.message.includes("404")) {
+                let newError = state.loginErrors;
+                newError.push("Invalid ScretKey");
                 setState({ ...state, loginErrors: newError });
               }
             });
@@ -181,7 +193,7 @@ export default function Login() {
     <div style={{ backgroundColor: "rgba(0,0,0,0.05)" }}>
       <div className={styles.backDiv}>
         <h1>
-          TourCyber<span>DB</span>
+          Tourism<span>DB</span>
         </h1>
         <Link href="homePage">
           <CloseIcon fontSize="large" />
@@ -246,7 +258,10 @@ export default function Login() {
           ))}
           <>
             {!state.submitAction ? (
-              signupDetails.map((each, index) => (
+              (state.admin
+                ? [...signupDetails, "secretKey"]
+                : signupDetails
+              ).map((each, index) => (
                 <TextField
                   className={styles.input}
                   onChange={async (e) => await handleInput(e)}
@@ -310,7 +325,9 @@ export default function Login() {
             </div>
           </>
           {state.loginErrors.map((each, index) => (
-            <p style={{ color: "rgb(255,50,50)" }} key={index}>{each}</p>
+            <p style={{ color: "rgb(255,50,50)" }} key={index}>
+              {each}
+            </p>
           ))}{" "}
           <p
             onClick={async () =>

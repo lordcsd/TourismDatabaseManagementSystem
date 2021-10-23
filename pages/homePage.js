@@ -12,7 +12,7 @@ let baseUrl = "http://localhost:3001";
 
 let DetailCard = ({ imageUrl, desc, title }) => (
   <div className={styles.detailCard}>
-    <Image alt="cardImage" height={160*2} width={200*2} src={imageUrl} />
+    <Image alt="cardImage" height={160 * 2} width={200 * 2} src={imageUrl} />
     <div className={styles.texts}>
       <h2>{title}</h2>
       <p>{desc}</p>
@@ -57,9 +57,9 @@ export default function HomePage() {
         setNumberOfSites(res.data.count);
       })
       .catch((err) => console.log(err));
-    }, []);
-    // eslint-disable-line react-hooks/exhaustive-deps
-    
+  }, []);
+  // eslint-disable-line react-hooks/exhaustive-deps
+
   return (
     <div className={styles.homeRoot}>
       <header className={styles.homeHeader}>
@@ -100,11 +100,11 @@ export default function HomePage() {
         <div style={{ padding: "0 0 40px 0", display: "block" }}>
           <h4>About Us</h4>
           <div>
-            CyberDB allows you experience realtime database management system
-            for the tourism industry, allowing you manage events, tickets, event
-            availabity, keep track of the entire tourism process, allowing you
-            to access available tickets you to buy tickets and follow your trips
-            from start to finish!
+            TourismDB allows you experience realtime Information Management as
+            it relates the tourism industry, allowing you manage events,
+            tour-tickets, event availabity, keep track of the entire tourism
+            process, allowing Tourist view and purchase available tour-tickets
+            and follow their trips from start to finish!
           </div>
         </div>
       </main>
